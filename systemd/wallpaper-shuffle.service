@@ -1,0 +1,9 @@
+[Unit]
+Description=Set a random wallpaper
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+Environment=WALLPAPER_DIR=%h/Pictures/wallpapers
+ExecStart=%h/.local/bin/wallpaper-shuffle

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Pick a random wallpaper from WALLPAPER_DIR and apply it (GNOME).
+set -euo pipefail
+
+DIR="${WALLPAPER_DIR:-$HOME/Pictures/wallpapers}"
+STATE="${XDG_STATE_HOME:-$HOME/.local/state}/wallpaper-shuffle.last"
+
+# Fresh machine without the wallpapers copied over yet: skip quietly
+# instead of failing the systemd unit every 15 minutes.
+if [ ! -d "$DIR" ]; then
+  echo "$DIR does not exist; skipping" >&2
+  exit 0
+fi
+
+mapfile -t pics < <(find "$DIR" -type f \
+  \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
+     -o -iname '*.webp' -o -iname '*.bmp' \) | sort)
+
+if [ "${#pics[@]}" -eq 0 ]; then
+  echo "no images found in $DIR" >&2
+  exit 1
+fi
+
+last=""
+[ -f "$STATE" ] && last=$(cat "$STATE")
+
+# Avoid repeating the previous pick when there's more than one option.
+pick=""
+for _ in $(seq 10); do
+  pick="${pics[RANDOM % ${#pics[@]}]}"
+  [ "$pick" != "$last" ] && break
+done
+
+uri="file://$pick"
+gsettings set org.gnome.desktop.background picture-uri "$uri"
+gsettings set org.gnome.desktop.background picture-uri-dark "$uri"
+gsettings set org.gnome.desktop.screensaver picture-uri "$uri"
+
+mkdir -p "$(dirname "$STATE")"
+printf '%s' "$pick" > "$STATE"
+echo "wallpaper -> $pick"

@@ -1,0 +1,78 @@
+# ~/.config/ghostty/config
+# Reload without restarting: ctrl+shift+,
+
+### Look ──────────────────────────────────────────────────────────
+# Dark-only custom theme: ~/.config/ghostty/themes/harbor-dark
+theme = harbor-dark
+
+font-family = Fira Code
+font-size = 12
+# Uncomment to kill Fira Code's ligatures (-> == != etc.)
+# font-feature = -liga
+# A little air around the text; "balance" centers the leftover pixels.
+window-padding-x = 12
+window-padding-y = 10
+window-padding-balance = true
+
+background-opacity = 0.96
+# GNOME/Mutter does not blur, so this is a no-op here. Left for other WMs.
+# background-blur = true
+
+# Frameless window. Set to true if you want the GNOME headerbar back.
+gtk-titlebar = false
+# Zellij draws the tab bar, so hide Ghostty's.
+gtk-tabs-location = hidden
+
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true
+
+### Behaviour ─────────────────────────────────────────────────────
+copy-on-select = clipboard
+# Zellij owns session state (`zellij attach`), so don't restore windows.
+window-save-state = never
+quit-after-last-window-closed = true
+# ~15k lines of scrollback before Zellij's own buffer takes over.
+scrollback-limit = 10000000
+
+### Keybindings ───────────────────────────────────────────────────
+# Rule: Alt+* and Ctrl+* belong to Zellij. Ghostty only claims Ctrl+Shift+*.
+
+# Ghostty grabs alt+1..9 for its own tabs by default — hand them to Zellij.
+keybind = alt+one=unbind
+keybind = alt+digit_1=unbind
+keybind = alt+two=unbind
+keybind = alt+digit_2=unbind
+keybind = alt+three=unbind
+keybind = alt+digit_3=unbind
+keybind = alt+four=unbind
+keybind = alt+digit_4=unbind
+keybind = alt+five=unbind
+keybind = alt+digit_5=unbind
+keybind = alt+six=unbind
+keybind = alt+digit_6=unbind
+keybind = alt+seven=unbind
+keybind = alt+digit_7=unbind
+keybind = alt+eight=unbind
+keybind = alt+digit_8=unbind
+keybind = alt+nine=unbind
+keybind = alt+digit_9=unbind
+
+# Same for Ghostty's split navigation — Zellij moves panes itself.
+keybind = ctrl+alt+up=unbind
+keybind = ctrl+alt+down=unbind
+keybind = ctrl+alt+left=unbind
+keybind = ctrl+alt+right=unbind
+
+# ctrl+enter is fullscreen by default and swallows a chord lots of TUIs want.
+keybind = ctrl+enter=unbind
+keybind = f11=toggle_fullscreen
+
+# Multi-line input in REPLs, Claude Code, etc.
+keybind = shift+enter=text:\n
+
+### Zellij ────────────────────────────────────────────────────────
+# Uncomment to have every new Ghostty window attach to one shared
+# Zellij session (creating it the first time). Left off by default so
+# a plain shell is still one `ctrl+shift+n` away.
+# command = /home/ayush/.local/bin/zellij attach --create main

@@ -1,0 +1,4 @@
+# Always store and check out files with Linux line endings (LF), even when
+# committed from Windows. Bash scripts break if they get Windows (CRLF) endings.
+* text=auto eol=lf
+*.png binary

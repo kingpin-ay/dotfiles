@@ -1,0 +1,24 @@
+# harbor-dark - from colorhunt 3368A0/66A3BF/C8DFDB/F2EFE7, tuned for dark use
+palette = 0=#1B242D
+palette = 1=#C08585
+palette = 2=#8FB9A8
+palette = 3=#C9B88C
+palette = 4=#5B92CC
+palette = 5=#A38FB8
+palette = 6=#66A3BF
+palette = 7=#B4C6C4
+palette = 8=#2A3642
+palette = 9=#C08585
+palette = 10=#8FB9A8
+palette = 11=#BF9877
+palette = 12=#5B92CC
+palette = 13=#A38FB8
+palette = 14=#66A3BF
+palette = 15=#D2DCD9
+
+background = #141C24
+foreground = #B4C6C4
+cursor-color = #66A3BF
+cursor-text = #141C24
+selection-background = #2C3E4D
+selection-foreground = #D2DCD9
